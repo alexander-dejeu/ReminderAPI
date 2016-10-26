@@ -1,23 +1,22 @@
 # ReminderAPI
-Project Specs :
-Reminders API Project Spec
+# Reminders API Project Spec
 
 
-Overview
-This project tasks you with building a reminders application that synchronizes its data in the cloud. The goal is to create a useful application that combines everything you’ve learned in the cBack-end Web: API Services course. Feel free to comment on anything here for clarification. (Highlight text and then access Insert => Comment in the Google Docs menu.)
+## Overview
+This project tasks you with building a reminders application that synchronizes its data in the cloud. The goal is to create a useful application that combines everything you’ve learned in the Back-end Web: API Services course. Feel free to comment on anything here for clarification. (Highlight text and then access Insert => Comment in the Google Docs menu.)
 
 
 This document specifies the API for a back-end web service with enough detail for a developer to build the API service to spec and allow other developers to build front-end web and mobile client applications that connect to the back-end. It is structured into several milestones to allow for and promote iterative test-driven development to ensure the API service follows the spec. Data should be persisted to disk using the database of your choice.
 
 
-Requests and Responses
+### Requests and Responses
 HTTP request and response body data should be serialized in JSON format and specify the Content-Type and Accept headers as "application/json". The service should respond with appropriate HTTP status codes, as well as appropriate error messages as necessary. All fields are required in POST and PUT request body data unless otherwise indicated as optional. Fields should be validated appropriately (no empty strings, dates should be formatted correctly).
 
 
-Milestone 1: Tasks
+### Milestone 1: Tasks
 Features
-Tasks can be created, listed, and destroyed.
-Completed tasks are destroyed instead of stored.
+..* Tasks can be created, listed, and destroyed.
+..* Completed tasks are destroyed instead of stored.
 
 
 Data Models
@@ -36,7 +35,7 @@ destroy task with id
 
 
 
-Milestone 2: Task Lists
+### Milestone 2: Task Lists
 Features
 Tasks now have a completed flag.
 Tasks are now organized into lists.
@@ -73,7 +72,7 @@ destroy task with task_id
 
 
 
-Milestone 3: Users and Authentication
+### Milestone 3: Users and Authentication
 Features
 Tasks and lists now have a user account associated with each.
 Users can be created and destroyed.
@@ -102,7 +101,7 @@ If user authentication succeeds but the request is to access another user’s ta
 
 
 
-Milestone 4: Due Dates and Text Messages
+### Milestone 4: Due Dates and Text Messages
 Features
 Tasks now have an optional due date. User are sent text message reminders to alert them of tasks when their due dates pass.
 
