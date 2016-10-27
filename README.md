@@ -1,4 +1,3 @@
-# ReminderAPI
 # Reminders API Project Spec
 
 
@@ -14,106 +13,104 @@ HTTP request and response body data should be serialized in JSON format and spec
 
 
 ### Milestone 1: Tasks
-Features
-..* Tasks can be created, listed, and destroyed.
-..* Completed tasks are destroyed instead of stored.
+**Features**
+  * Tasks can be created, listed, and destroyed.
+  * Completed tasks are destroyed instead of stored.
 
 
-Data Models
-Tasks have 2 fields: id and text
+**Data Models**
+  * Tasks have 2 fields: *id* and *text*
 
 
-Routes and Actions
-POST   /tasks
-create new task with text field from request body
-GET    /tasks
-list all tasks
-GET    /tasks/<id>
-show task with id
-DELETE /tasks/<id>
-destroy task with id
+**Routes and Actions**
+  * *POST*   /tasks
+     * create new task with text field from request body
+  * *GET*    /tasks
+    * list all tasks
+  * *GET*    /tasks/&lt;id&gt;
+    * show task with *id*
+  * *DELETE* /tasks/&lt;id&gt;
+    * destroy task with *id*
 
 
-
 ### Milestone 2: Task Lists
-Features
-Tasks now have a completed flag.
-Tasks are now organized into lists.
-Lists can be created, listed, and destroyed.
+**Features**
+  * Tasks now have a completed flag.
+  * Tasks are now organized into lists.
+  * Lists can be created, listed, and destroyed.
 
 
-Data Models
-Lists have 2 fields: id and title
-Tasks now have 4 fields: id, list_id, text, and completed
+**Data Models**
+  * Lists have 2 fields: *id* and *title*
+  * Tasks now have 4 fields: *id*, *list_id*, *text*, and *completed*
 
 
-Routes and Actions
-POST   /lists
-create new list with title field from request body
-GET    /lists
-list all lists (do not show tasks within each list)
-GET    /lists/<list_id>
-show list with list_id
-PUT    /lists/<list_id>
-update list with list_id with title field from request body
-DELETE /lists/<list_id>
-destroy list with list_id
-POST   /lists/<list_id>/tasks
-create new task with text field from request body in list with list_id
-tasks are incomplete by default (completed is set to false)
-GET    /lists/<list_id>/tasks
-list all tasks in list with list_id
-GET    /lists/<list_id>/tasks/<task_id>
-show task with task_id
-PUT    /lists/<list_id>/tasks/<task_id>
-update task with task_id with text and completed fields from request body
-DELETE /lists/<idlist_idtasks/<task_id>
-destroy task with task_id
+**Routes and Actions**
+  * *POST*   /lists
+    * create new list with title field from request body
+  * *GET*    /lists
+    * list all lists (do not show tasks within each list)
+  * *GET*    /lists/&lt;list_id&gt;
+    * show list with *list_id*
+  * *PUT*    /lists/&lt;list_id&gt;
+    * update list with *list_id* with title field from request body
+  * *DELETE* /lists/&lt;list_id&gt;
+    * destroy list with *list_id*
+  * *POST*   /lists/&lt;list_id&gt;/tasks
+    * create new task with text field from request body in list with *list_id*
+    * tasks are incomplete by default (completed is set to false)
+  * *GET*    /lists/&lt;list_id&gt/tasks
+    * list all tasks in list with *list_id*
+  * *GET*    /lists/&lt;list_id&gt;/tasks/&lt;task_id&gt;
+    * show task with *task_id*
+  * *PUT*    /lists/&lt;list_id&gt;/tasks/&lt;task_id&gt;
+    * update task with *task_id* with text and completed fields from request body
+  * *DELETE* /lists/&lt;idlist_idtasks&gt;/&lt;task_id&gt;
+    * destroy task with *task_id*
 
 
-
 ### Milestone 3: Users and Authentication
-Features
-Tasks and lists now have a user account associated with each.
-Users can be created and destroyed.
-Most routes require user authentication.
+**Features**
+  * Tasks and lists now have a user account associated with each.
+  * Users can be created and destroyed.
+  * Most routes require user authentication.
 
 
-Data Models
-Users have 2 fields: id and name
-Lists now have 3 fields: id, user_id, and title
-Tasks now have 5 fields: id, user_id, list_id, text, and completed
+**Data Models**
+  * Users have 2 fields: *id* and *name*
+  * Lists now have 3 fields: *id*, *user_id*, and *title*
+  * Tasks now have 5 fields: *id*, *user_id*, *list_id*, *text*, and *completed*
 
 
-Routes and Actions
-POST   /users
-create new user with name field from request body
-does not require authentication (anyone can create a new account)
-DELETE /users/<user_id>
-destroy user with user_id
-requires authentication (only the owner can destroy their account)
-All other routes are unchanged except that they all now require user authentication and should only access or modify tasks and lists associated with the authenticated user.
+**Routes and Actions**
+  * *POST*   /users
+    * create new user with name field from request body
+    * does not require authentication (anyone can create a new account)
+  * *DELETE* /users/&lt;user_id&gt;
+    * destroy user with *user_id*
+    * requires authentication (only the owner can destroy their account)
+    * All other routes are unchanged except that they all now require user authentication and should only access or modify tasks and lists associated with the authenticated user.
 
 
-Authentication and Authorization
-If the request does not contain any user authentication info or user authentication fails, respond with HTTP status code 401 Unauthorized.
-If user authentication succeeds but the request is to access another user’s tasks or lists, respond with HTTP status code 403 Forbidden.
+**Authentication and Authorization**
+  * If the request does not contain any user authentication info or user authentication fails, respond with HTTP status code 401 Unauthorized.
+  * If user authentication succeeds but the request is to access another user’s tasks or lists, respond with HTTP status code 403 Forbidden.
 
 
-
+
 ### Milestone 4: Due Dates and Text Messages
-Features
-Tasks now have an optional due date. User are sent text message reminders to alert them of tasks when their due dates pass.
+**Features**
+  * Tasks now have an optional due date. User are sent text message reminders to alert them of tasks when their due dates pass.
 
 
-Data Models
-Users now have 3 fields: id, name, and phone_number
-Tasks now have 6 fields: id, user_id, list_id, text, completed, and date_due
+**Data Models**
+  * Users now have 3 fields: *id*, *name*, and *phone_number*
+  * Tasks now have 6 fields: *id*, *user_id*, *list_id*, *text*, *completed*, and *date_due*
 
 
-Routes and Actions
-POST   /lists/<list_id>/tasks
-create new task with text and (optional) date_due fields from request body in list with list_id
-PUT    /lists/<list_id>/tasks/<task_id>
-update task with task_id with text, completed, and (optional) date_due fields from request body
-All other routes are unchanged.
+**Routes and Actions**
+  * *POST*   /lists/<list_id>/tasks
+    * create new task with text and (optional) date_due fields from request body in list with *list_id*
+  * *PUT*    /lists/<list_id>/tasks/<task_id>
+    * update task with *task_id* with text, completed, and (optional) date_due fields from request body
+    * All other routes are unchanged.
